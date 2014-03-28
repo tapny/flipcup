@@ -38,8 +38,10 @@ $(document).ready(function() {
                 // odds 
                extra = "vs <br>" 
             }
-            
+            // TODO variablize round number 
             $('.round1').append(makeTeamElem(item.text()) + makeCheckboxElem() + extra);
         });
+
+        $('.round1').append("<button>Advance Winners</button>");
     });
 });
