@@ -12,8 +12,10 @@ $(document).ready(function() {
     };
 
     var checkWinners = function( subroundElem ) {
+        console.log(subroundElem);
         var numWinners = subroundElem.find("winner").length;
         var numBrackets = subroundElem.find("bracket").length;
+        var round = subroundElem.data("round");
         if (numBrackets / 2 == numWinners) {
             //advance
             var winners = $(".round" + round + " .winner");
@@ -24,14 +26,14 @@ $(document).ready(function() {
     var makeBracketElem = function(teamA, teamB) {
         console.log("her");
         var bracketElem = $("<div></div>").addClass("bracket");
-        var teamAElem = $("<div></div>").addClass("team").append("<a href='#'></a>").text(teamA);
-        var teamBElem = $("<div></div>").addClass("team").append("<a href='#'></a>").text(teamB);
+        var teamAElem = $("<div></div>").addClass("team").html("<a href='#'>"+teamA+"</a>");
+        var teamBElem = $("<div></div>").addClass("team").html("<a href='#'>"+teamB+"</a>");
         teamAElem.click( function() {
-            $(this).toggleClass("winner").parent().toggleClass("closed");
+            $(this).find('a').toggleClass("winner").parent().toggleClass("closed");
             checkWinners( $(this).parent().parent());
         });
         teamBElem.click( function() {
-            $(this).toggleClass("winner").parent().toggleClass("closed");
+            $(this).find('a').toggleClass("winner").parent().toggleClass("closed");
             checkWinners( $(this).parent().parent());
         });
         console.log("vjw");
@@ -94,12 +96,14 @@ $(document).ready(function() {
         
         // add finished section
         $('.rounds').append(subroundElem)
+        relayout();
     };
     
 
     $('.start').click( function(e) {
         // read all teams
         var teams = $('.team');
+        $(".rounds").show();
         createCookies('team', teams);
         randomizeAndDisplay(teams, 1);
     });
