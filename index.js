@@ -12,21 +12,15 @@ $(document).ready(function() {
     };
 
     var checkWinners = function( subroundElem ) {
-        console.log(subroundElem);
         subroundElem = $(subroundElem);
-        //console.log(subroundElem.get(0).html());
         var numWinners = subroundElem.find(".winner").length;
         var numBrackets = subroundElem.find(".bracket").length;
-        console.log("num winners " + numWinners);
-        console.log('num brackets ' + numBrackets);
         var round = subroundElem.data("round");
         if (numBrackets  == numWinners) {
-            console.log("yo");
             //advance
             var winners = $(".round" + round + " .winner").parent().clone().removeClass("closed");
             winners.find("a").removeClass("winner");
 
-            console.log(winners);
             randomizeAndDisplay(winners, round+1);
         }
     };
@@ -72,7 +66,6 @@ $(document).ready(function() {
             alert($(teams[0]).find('a').text() + " is the winner!");
             return
         }
-
         // randomize
         teams.sort(function() {
             return Math.random() - 0.5;
@@ -80,12 +73,10 @@ $(document).ready(function() {
 
         // display
         var subroundElem = $("<section></section>").addClass("subround").addClass("round" + round).data("round", round);
-        console.log("vjw");
-        console.log(teams);
+
         // subround
         for ( var i = 0; i < teams.length; i+=2 ) {
             var teamAName = $(teams[i]).find('a').text()
-            console.log(teams[i]);
             var teamBName = "";
             if (i+1 == teams.length){
                 // at end of list
