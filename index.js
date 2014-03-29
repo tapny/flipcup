@@ -4,6 +4,13 @@ $(document).ready(function() {
     
     var roundNumber = 1;
 
+    var createCookies = function(basename, arr) {
+        $.each(arr, function(index, elem) {
+            // what if embedd html dom elems in cookie?
+            $.cookie(basename+index, $(elem).attr("value"));
+        });
+    };
+
     var makeTeamElem = function(text) {
         var teamElem = $("<div class='team' value='" + text + "'>" + text + "</div>");
         teamElem.draggable();
@@ -48,7 +55,6 @@ $(document).ready(function() {
                extra = "vs <br>" 
             }
 
-            // TODO variablize round number 
             var teamName = item.attr("value");
             var teamElem = $(makeTeamElem(teamName));
             teamElem.prepend(makeCheckboxElem(teamName));
@@ -68,14 +74,19 @@ $(document).ready(function() {
         // add finished section
         $('.rounds').append(roundSection)
     };
+    
 
     $('.start').click( function(e) {
         // read all teams
         var teams = $('.team');
-        $.each(teams, function(index, team) {
-            console.log( "Creating cookie" + index + " " + $(team).attr("value"));
-            $.cookie('team'+index, $(team).attr("value"));
-        });
+        createCookies('team', teams);
         randomizeAndDisplay(teams, 1);
     });
+    
+    // if cookies are present 
+    (function() {
+        // populate teams        
+        // populate rounds
+
+    }())
 });
