@@ -89,4 +89,20 @@ $(document).ready(function() {
         // populate rounds
 
     }())
+
+
 });
+
+
+
+
+    var relayout = function() {
+        $(".subround").each(function() {
+            var $brackets = $(this).find(".bracket");
+            $brackets.css("height",(100 / $brackets.length) + "%");
+            var $winners = $brackets.find(".team");
+            if($winners.length == 1) {
+                $winners.css("height","100%");
+            }
+        });
+    }
