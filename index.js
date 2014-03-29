@@ -5,7 +5,9 @@ $(document).ready(function() {
     var roundNumber = 1;
 
     var makeTeamElem = function(text) {
-        return "<div class='team' value='" + text + "'>" + text + "</div>";
+        var teamElem = $("<div class='team' value='" + text + "'>" + text + "</div>");
+        teamElem.draggable();
+        return teamElem
     };
 
     var makeCheckboxElem = function(text) {
@@ -70,6 +72,10 @@ $(document).ready(function() {
     $('.start').click( function(e) {
         // read all teams
         var teams = $('.team');
+        $.each(teams, function(index, team) {
+            console.log( "Creating cookie" + index + " " + $(team).attr("value"));
+            $.cookie('team'+index, $(team).attr("value"));
+        });
         randomizeAndDisplay(teams, 1);
     });
 });
