@@ -13,18 +13,25 @@ $(document).ready(function() {
 
     var checkWinners = function( subroundElem ) {
         console.log(subroundElem);
-        var numWinners = subroundElem.find("winner").length;
-        var numBrackets = subroundElem.find("bracket").length;
+        subroundElem = $(subroundElem);
+        //console.log(subroundElem.get(0).html());
+        var numWinners = subroundElem.find(".winner").length;
+        var numBrackets = subroundElem.find(".bracket").length;
+        console.log("num winners " + numWinners);
+        console.log('num brackets ' + numBrackets);
         var round = subroundElem.data("round");
-        if (numBrackets / 2 == numWinners) {
+        if (numBrackets  == numWinners) {
+            console.log("yo");
             //advance
-            var winners = $(".round" + round + " .winner");
+            var winners = $(".round" + round + " .winner").parent().clone().removeClass("closed");
+            winners.find("a").removeClass("winner");
+
+            console.log(winners);
             randomizeAndDisplay(winners, round+1);
         }
     };
 
     var makeBracketElem = function(teamA, teamB) {
-        console.log("her");
         var bracketElem = $("<div></div>").addClass("bracket");
         var teamAElem = $("<div></div>").addClass("team").html("<a href='#'>"+teamA+"</a>");
         var teamBElem = $("<div></div>").addClass("team").html("<a href='#'>"+teamB+"</a>");
@@ -36,9 +43,7 @@ $(document).ready(function() {
             $(this).find('a').toggleClass("winner").parent().toggleClass("closed");
             checkWinners( $(this).parent().parent());
         });
-        console.log("vjw");
         bracketElem.append(teamAElem).append(teamBElem)
-        console.log(bracketElem.get(0));
         return bracketElem;
     };
 
@@ -75,21 +80,19 @@ $(document).ready(function() {
 
         // display
         var subroundElem = $("<section></section>").addClass("subround").addClass("round" + round).data("round", round);
-
+        console.log("vjw");
+        console.log(teams);
         // subround
         for ( var i = 0; i < teams.length; i+=2 ) {
-            console.log(i);
             var teamAName = $(teams[i]).data("name");
-            var teamBName = "";
             console.log(teamAName);
+            var teamBName = "";
             if (i+1 == teams.length){
                 // at end of list
-                console.log("in dumny");
                 teamBName = "DUMMY";
             } else {
                 teamBName = $(teams[i+1]).data("name");
             }
-            console.log(teamBName);
             var bracketElem = makeBracketElem(teamAName, teamBName, round);
             subroundElem.append(bracketElem);
         }
