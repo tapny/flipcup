@@ -33,8 +33,8 @@ $(document).ready(function() {
 
     var makeBracketElem = function(teamA, teamB) {
         var bracketElem = $("<div></div>").addClass("bracket");
-        var teamAElem = $("<div></div>").addClass("team").html("<a href='#'>"+teamA+"</a>");
-        var teamBElem = $("<div></div>").addClass("team").html("<a href='#'>"+teamB+"</a>");
+        var teamAElem = $("<div></div>").addClass("team").data("name", teamA).html("<a href='#'>"+teamA+"</a>");
+        var teamBElem = $("<div></div>").addClass("team").data("name", teamB).html("<a href='#'>"+teamB+"</a>");
         teamAElem.click( function() {
             $(this).find('a').toggleClass("winner").parent().toggleClass("closed");
             checkWinners( $(this).parent().parent());
@@ -48,7 +48,7 @@ $(document).ready(function() {
     };
 
     var makeTeamElem = function(text) {
-        var teamElem = $("<div class='team' data-name='" + text + "'>" + text + "</div>");
+        var teamElem = $("<div class='team' data-name='" + text + "'><a href='#'>" + text + "</a></div>");
         return teamElem
     }; 
 
@@ -69,7 +69,7 @@ $(document).ready(function() {
     var randomizeAndDisplay = function(teams, round) {
 
         if (teams.length == 1) {
-            alert($(teams[0]).data("name") + " is the winner!");
+            alert($(teams[0]).find('a').text() + " is the winner!");
             return
         }
 
@@ -84,14 +84,14 @@ $(document).ready(function() {
         console.log(teams);
         // subround
         for ( var i = 0; i < teams.length; i+=2 ) {
-            var teamAName = $(teams[i]).data("name");
-            console.log(teamAName);
+            var teamAName = $(teams[i]).find('a').text()
+            console.log(teams[i]);
             var teamBName = "";
             if (i+1 == teams.length){
                 // at end of list
                 teamBName = "DUMMY";
             } else {
-                teamBName = $(teams[i+1]).data("name");
+                teamBName = $(teams[i+1]).find('a').text();
             }
             var bracketElem = makeBracketElem(teamAName, teamBName, round);
             subroundElem.append(bracketElem);
