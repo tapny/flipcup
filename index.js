@@ -24,8 +24,10 @@ $(document).ready(function() {
 
     var randomizeAndDisplay = function(teams, round) {
 
-        if (teams.length == 1)
+        if (teams.length == 1) {
+            alert($(teams[0]).attr("value") + " is the winner!");
             return
+        }
 
         // randomize
         teams.sort(function() {
@@ -34,6 +36,8 @@ $(document).ready(function() {
 
         // display
         var roundSection = $("<div class=round" +round + "></div>");
+        roundSection.append("<br><hr><h3>Round " + round + "</h3><div>Check the winners</div><br>");
+
         $.each(teams, function(index, elem) {
             var item = $(elem)
             var extra = "<br>"
@@ -52,7 +56,7 @@ $(document).ready(function() {
         });
         
         // winners button, attach click action
-        var winnerButton = $("<button>Advance Winners</button>");
+        var winnerButton = $("<button>Advance Winners</button><br>");
         winnerButton.click( function() {
             var winners = $(".round" + round + " input:checked");
             randomizeAndDisplay(winners, round+1);
