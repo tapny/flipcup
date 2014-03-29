@@ -1,0 +1,138 @@
+
+@mixin prefix ( $property, $value... ) {
+  -webkit-#{$property}: $value;
+     -moz-#{$property}: $value;
+      -ms-#{$property}: $value;
+       -o-#{$property}: $value;
+          #{$property}: $value;
+}
+
+
+
+html,body{
+  height:100%;
+  overflow:hidden;
+  background:#fff9ef;
+}
+
+* {
+  box-sizing:border-box;
+}
+
+.rounds {
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  z-index:9;
+}
+
+.subround{
+  width:0%;
+  float:left;
+  height:100%;
+
+  &:nth-last-child(-n+4) {
+    width:24.999%;
+    border-right:1px solid #fff9ef;
+  }
+
+  &:nth-child(4n) {
+    background:#fba48a;
+    a.winner,a:hover {background:#fd856b;}
+    .bracket::after {color:rgba(darken(#fd856b,10%),.5);}
+  }
+  &:nth-child(4n+1) {
+    background:#5aa797;
+    a.winner,a:hover {background:#408f7e;}
+    .bracket::after {color:rgba(darken(#408f7e,10%),.5);}
+  }
+  &:nth-child(4n+2) {
+    background:#e07872;
+    a.winner,a:hover {background:#d3514f;}
+    .bracket::after {color:rgba(darken(#d3514f,10%),.5);}
+  }
+  &:nth-child(4n+3) {
+    background:#cb799d;
+    a.winner,a:hover {background:#c4638e;}
+    .bracket::after {color:rgba(darken(#c4638e,10%),.5);}
+  }
+
+  .bracket {
+    border-bottom:1px solid #fff9ef;
+    position:relative;
+    width:100%;
+    height:25%;
+    // margin:5px;
+    // background:rgba(#ffffff,.1);
+    &::after {
+      content:"vs";
+      z-index:19;
+      letter-spacing:.1em;
+      font-weight:bold;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      display:block;
+      position:absolute;
+      // color:rgba(#ffffff,.2);
+      width:100px;
+      height:20px;
+      top:50%;
+      left:50%;
+      text-align:center;
+      line-height:20px;
+      margin-top:-10px;
+      margin-left:-50px;
+    }
+
+    .team {
+      width:100%;
+      height:50%;
+      display:table;
+
+      a {
+        position:relative;
+        display: table-cell;
+        width:100%;
+        height:100%;
+        color:#ffffff;
+        vertical-align: middle;
+        text-align: center;
+        text-decoration:none;
+        text-transform:uppercase;
+        letter-spacing:.1em;
+        font-weight:bold;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        // &:hover {
+        //   background:rgba(#000000,.05);
+        // }
+        &.winner {
+          color:#ffffff !important;
+          &::after {
+            content:"";
+            display:block;
+            position:absolute;
+            width:10px;
+            height:10px;
+            border-top:1px solid #ffffff;
+            border-right:1px solid #ffffff;
+            top:50%;
+            right:10px;
+            margin-top:-5px;
+            @include prefix(transform,rotate(45deg));
+          }
+        }
+      }
+    }
+
+    &.closed {
+      .team a {color:rgba(#ffffff,.5);}
+    }
+  }
+}
+
+
+
+
+
+

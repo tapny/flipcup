@@ -1,0 +1,105 @@
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: #fff9ef; }
+
+* {
+  box-sizing: border-box; }
+
+.rounds {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9; }
+
+.subround {
+  width: 0%;
+  float: left;
+  height: 100%; }
+  .subround:nth-last-child(-n+4) {
+    width: 24.999%;
+    border-right: 1px solid #fff9ef; }
+  .subround:nth-child(4n) {
+    background: #fba48a; }
+    .subround:nth-child(4n) a.winner, .subround:nth-child(4n) a:hover {
+      background: #fd856b; }
+    .subround:nth-child(4n) .bracket::after {
+      color: rgba(252, 92, 57, 0.5); }
+  .subround:nth-child(4n+1) {
+    background: #5aa797; }
+    .subround:nth-child(4n+1) a.winner, .subround:nth-child(4n+1) a:hover {
+      background: #408f7e; }
+    .subround:nth-child(4n+1) .bracket::after {
+      color: rgba(48, 108, 95, 0.5); }
+  .subround:nth-child(4n+2) {
+    background: #e07872; }
+    .subround:nth-child(4n+2) a.winner, .subround:nth-child(4n+2) a:hover {
+      background: #d3514f; }
+    .subround:nth-child(4n+2) .bracket::after {
+      color: rgba(191, 50, 48, 0.5); }
+  .subround:nth-child(4n+3) {
+    background: #cb799d; }
+    .subround:nth-child(4n+3) a.winner, .subround:nth-child(4n+3) a:hover {
+      background: #c4638e; }
+    .subround:nth-child(4n+3) .bracket::after {
+      color: rgba(177, 67, 116, 0.5); }
+  .subround .bracket {
+    border-bottom: 1px solid #fff9ef;
+    position: relative;
+    width: 100%;
+    height: 25%; }
+    .subround .bracket::after {
+      content: "vs";
+      z-index: 19;
+      letter-spacing: .1em;
+      font-weight: bold;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      display: block;
+      position: absolute;
+      width: 100px;
+      height: 20px;
+      top: 50%;
+      left: 50%;
+      text-align: center;
+      line-height: 20px;
+      margin-top: -10px;
+      margin-left: -50px; }
+    .subround .bracket .team {
+      width: 100%;
+      height: 50%;
+      display: table; }
+      .subround .bracket .team a {
+        position: relative;
+        display: table-cell;
+        width: 100%;
+        height: 100%;
+        color: #ffffff;
+        vertical-align: middle;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        font-weight: bold;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+        .subround .bracket .team a.winner {
+          color: #ffffff !important; }
+          .subround .bracket .team a.winner::after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-top: 1px solid #ffffff;
+            border-right: 1px solid #ffffff;
+            top: 50%;
+            right: 10px;
+            margin-top: -5px;
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg); }
+    .subround .bracket.closed .team a {
+      color: rgba(255, 255, 255, 0.5); }
